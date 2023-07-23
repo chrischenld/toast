@@ -1,6 +1,12 @@
 import React from "react";
 
-export function Toast({ toastKey, statusType, message }) {
+interface Props {
+  toastKey: number;
+  statusType: string;
+  message: string;
+}
+
+export function Toast({ toastKey, statusType, message }: Props) {
   return (
     <div className="w-60 flex flex-col p-6 gap-2 bg-default-inset rounded-md border border-default-border drop-shadow">
       <p className="text-default-accent text-xs">

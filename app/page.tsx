@@ -73,7 +73,7 @@ export default function Home() {
 
   return (
     <div className="bg-default-base text-default-fg min-h-screen flex flex-col gap-8 p-8">
-      <Button text="pop toast" onClick={popToast} type="any" />
+      <Button text="pop toast" onClick={popToast} />
       <div className="h-64 relative">
         {toasts.map((toast, index) => {
           const secondToast = index === toasts.length - 2;
