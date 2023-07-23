@@ -1,49 +1,53 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Toast } from "../components/Toast";
 import { Button } from "../components/Button";
-import { motion, animate } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function Home() {
-  const [toasts, setToasts] = useState([]);
-  const [mostRecentToast, setMostRecentToast] = useState(null);
+  const [toasts, setToasts] = useState<JSX.Element[]>([]);
+  // const [mostRecentToast, setMostRecentToast] = useState(null);
+  const [mostRecentToast, setMostRecentToast] = useState<JSX.Element | null>(
+    null
+  );
 
   const statusType = [
     "Error message",
     "Success message",
     "Warning message",
-    "New connection"
-  ]
+    "New connection",
+  ];
 
   const message = [
-    "Amet nisi exercitation excepteur." ,
+    "Amet nisi exercitation excepteur.",
     "Tempor esse pariatur anim.",
     "Consequat mollit aliqua occaecat commodo ex irure.",
-    "Labore voluptate et anim culpa ullamco excepteur eu proident minim ad."
-  ]
+    "Labore voluptate et anim culpa ullamco excepteur eu proident minim ad.",
+  ];
 
-  const randomStatusType = statusType[Math.floor(Math.random() * statusType.length)]
-  const randomMessage = message[Math.floor(Math.random() * message.length)]
-  
+  const randomStatusType =
+    statusType[Math.floor(Math.random() * statusType.length)];
+  const randomMessage = message[Math.floor(Math.random() * message.length)];
+
   const popIn = {
-    visible: { scale: 1, y:0, opacity: 1 },
-    hidden: { scale: .9, y:40, opacity: .8 },
+    visible: { scale: 1, y: 0, opacity: 1 },
+    hidden: { scale: 0.9, y: 40, opacity: 0.8 },
   };
 
   const popOut = {
-    visible: { opacity: 1, y:0 },
-    second: { y:-24, scale: 0.9 },
-    third: { y:-48, scale: 0.8 },
-    hidden: { opacity: 0, scale: 0.7, y:-72 }
-  }
+    visible: { opacity: 1, y: 0 },
+    second: { y: -24, scale: 0.9 },
+    third: { y: -48, scale: 0.8 },
+    hidden: { opacity: 0, scale: 0.7, y: -72 },
+  };
 
   useEffect(() => {
     if (mostRecentToast) {
       setToasts((prevToasts) => [...prevToasts, mostRecentToast]);
       setMostRecentToast(null);
     }
-  }, [mostRecentToast])
+  }, [mostRecentToast]);
 
   const popToast = () => {
     const newToast = (
@@ -69,7 +73,7 @@ export default function Home() {
 
   return (
     <div className="bg-default-base text-default-fg min-h-screen flex flex-col gap-8 p-8">
-      <Button text="pop toast" onClick={popToast} />
+      <Button text="pop toast" onClick={popToast} type="any" icon="any" />
       <div className="h-64 relative">
         {toasts.map((toast, index) => {
           const secondToast = index === toasts.length - 2;
@@ -81,7 +85,15 @@ export default function Home() {
               key={index}
               className={`absolute w-fit h-fit m-auto inset-x-0`}
               variants={popOut}
-              animate={secondToast ? "second" : thirdToast ? "third" : pastToasts ? "hidden" : "visible"}
+              animate={
+                secondToast
+                  ? "second"
+                  : thirdToast
+                  ? "third"
+                  : pastToasts
+                  ? "hidden"
+                  : "visible"
+              }
               transition={{ type: "spring", stiffness: 300, damping: 100 }}
             >
               {toast}
