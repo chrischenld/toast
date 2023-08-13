@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Toast } from "../components/Toast";
 import { Button } from "../components/Button";
+import { Sidebar } from "../components/Sidebar";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -72,9 +73,12 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-default-base text-default-fg min-h-screen flex flex-col gap-8 p-8">
-      <Button text="pop toast" onClick={popToast} />
-      <div className="h-64 relative">
+    <div className="bg-default-base text-default-fg min-h-screen flex flex-row gap-8">
+      <Sidebar />
+      <div className="p-8 flex flex-col gap-32">
+        <Button text="pop toast" onClick={popToast} />
+      </div>
+      <div className="h-48 absolute bottom-0 inset-x-0">
         {toasts.map((toast, index) => {
           const secondToast = index === toasts.length - 2;
           const thirdToast = index === toasts.length - 3;
