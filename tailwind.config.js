@@ -20,6 +20,7 @@ module.exports = {
           fg: "#FAFAFA",
           accent: "#8E60BB",
           border: "#29292F",
+          muted: "#313139",
         },
       },
       // backgroundImage: {
