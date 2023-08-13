@@ -22,8 +22,14 @@ export function NavItem({ itemName, accent, accentText }: Props) {
         hover:cursor-pointer
     "
     >
-      <p>{itemName}</p>
+      <p>{itemName || "item"}</p>
       {accent && <p className="text-default-accent">{accentText || "•"}</p>}
     </div>
   );
 }
+
+NavItem.defaultProps = {
+  itemName: "item",
+  accent: false,
+  accentText: "•",
+};
