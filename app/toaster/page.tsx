@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Toast } from "./components/Toast";
-import { Button } from "./components/Button";
-import { Sidebar } from "./components/Sidebar";
+import { Toast } from "../components/Toast";
+import { Button } from "../components/Button";
+import { Sidebar } from "../components/Sidebar";
 import { motion } from "framer-motion";
-import Link from "next/link";
 
 export default function Home() {
   const [toasts, setToasts] = useState<JSX.Element[]>([]);
@@ -76,9 +75,35 @@ export default function Home() {
   return (
     <div className="bg-default-base text-fg-default min-h-screen flex flex-row gap-8">
       <Sidebar />
-      <div className="p-8 text-fg-muted">
-        <p>indoorpig</p>
-        <p>work in progress</p>
+      <div className="p-8 flex flex-col gap-32">
+        <Button text="pop toast" onClick={popToast} />
+      </div>
+      <div className="h-48 absolute bottom-0 inset-x-0">
+        {toasts.map((toast, index) => {
+          const secondToast = index === toasts.length - 2;
+          const thirdToast = index === toasts.length - 3;
+          const pastToasts = index < toasts.length - 3;
+
+          return (
+            <motion.div
+              key={index}
+              className={`absolute w-fit h-fit m-auto inset-x-0`}
+              variants={popOut}
+              animate={
+                secondToast
+                  ? "second"
+                  : thirdToast
+                  ? "third"
+                  : pastToasts
+                  ? "hidden"
+                  : "visible"
+              }
+              transition={{ type: "spring", stiffness: 300, damping: 100 }}
+            >
+              {toast}
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );

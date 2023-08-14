@@ -9,7 +9,7 @@ interface Props {
 export function Toast({ toastKey, statusType, message }: Props) {
   return (
     <div className="w-60 flex flex-col p-6 gap-2 bg-default-inset rounded-md border border-default-border drop-shadow">
-      <p className="text-default-accent text-xs">
+      <p className="text-fg-accent text-xs">
         {statusType || "Status message"}
       </p>
       <p className="text-sm">

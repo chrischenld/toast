@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { NavItem } from "./NavItem";
 import { Button } from "./Button";
 import { motion, AnimatePresence, useSpring } from "framer-motion";
+import Link from "next/link";
 
 export function Sidebar() {
   const [sidebarCollapse, setSidebarCollapse] = useState("18rem");
@@ -36,8 +37,12 @@ export function Sidebar() {
             exit={{ opacity: 0, x: "-2rem" }}
             transition={{ type: "spring", stiffness: 500, damping: 30 }} // Transition duration
           >
-            <NavItem itemName="item one" accent accentText="new" />
-            <NavItem itemName="item two" />
+            <Link href="/">
+              <NavItem itemName="home" />
+            </Link>
+            <Link href="/toaster">
+              <NavItem itemName="toaster" accent accentText="new" />
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

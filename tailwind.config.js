@@ -22,6 +22,11 @@ module.exports = {
           border: "#29292F",
           muted: "#313139",
         },
+        fg: {
+          default: "#FAFAFA",
+          muted: "#A1A1A1",
+          accent: "#8E60BB",
+        },
       },
       // backgroundImage: {
       //   "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
