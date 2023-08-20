@@ -1,7 +1,6 @@
 "use client";
 
 import { Sidebar } from "./components/Sidebar";
-import { motion } from "framer-motion";
 
 export default function Home() {
   return (
