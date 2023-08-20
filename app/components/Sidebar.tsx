@@ -7,8 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 interface Props {
-  hasSubNav: boolean;
-  subNavItems: SubNavItems[];
+  hasSubNav?: boolean;
+  subNavItems?: SubNavItems[];
 }
 
 interface SubNavItems {
