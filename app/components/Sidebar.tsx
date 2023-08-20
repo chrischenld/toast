@@ -25,23 +25,26 @@ export function Sidebar() {
         type: "spring",
         stiffness: 700,
         damping: 50,
-      }} // Transition duration and onUpdate
+      }}
     >
       <Button text="hide" onClick={toggleSidebarCollapse} />
       <AnimatePresence>
         {hideCollapsed && (
           <motion.div
             className="flex flex-col gap-1"
-            initial={{ opacity: 0, x: "-2rem" }}
+            initial={{ opacity: 0, x: "-1rem" }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "-2rem" }}
-            transition={{ type: "spring", stiffness: 500, damping: 30 }} // Transition duration
+            exit={{ opacity: 0, x: "-1rem" }}
+            transition={{ type: "spring", stiffness: 500, damping: 50 }}
           >
             <Link href="/">
               <NavItem itemName="home" />
             </Link>
             <Link href="/toaster">
-              <NavItem itemName="toaster" accent accentText="new" />
+              <NavItem itemName="toaster" />
+            </Link>
+            <Link href="/flyout">
+              <NavItem itemName="flyout" accent accentText="new" />
             </Link>
           </motion.div>
         )}
