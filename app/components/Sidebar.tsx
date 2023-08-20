@@ -63,7 +63,7 @@ export function Sidebar({ hasSubNav, subNavItems }: Props) {
           )}
         </AnimatePresence>
       </motion.div>
-      {hasSubNav && (
+      {hasSubNav && subNavItems && (
         <motion.div
           className="flex flex-col gap-4 max-h-screen p-4 bg-default-base border-r-2 border-default-border"
           initial={{ opacity: 0, width: "2rem" }}
