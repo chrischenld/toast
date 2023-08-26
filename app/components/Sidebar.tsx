@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 interface Props {
+  selectedNavItem?: string;
   hasSubNav?: boolean;
   subNavItems?: SubNavItems[];
 }
@@ -16,9 +17,10 @@ interface SubNavItems {
   href: string;
   accent?: boolean;
   accentText?: string;
+  isSelected?: boolean;
 }
 
-export function Sidebar({ hasSubNav, subNavItems }: Props) {
+export function Sidebar({ selectedNavItem, hasSubNav, subNavItems }: Props) {
   const [sidebarCollapse, setSidebarCollapse] = useState("18rem");
   const [hideCollapsed, setHideCollapsed] = useState(true);
 
@@ -51,30 +53,37 @@ export function Sidebar({ hasSubNav, subNavItems }: Props) {
               transition={{ type: "spring", stiffness: 500, damping: 50 }}
             >
               <Link href="/">
-                <NavItem itemName="home" />
+                <NavItem
+                  itemName="home"
+                  isSelected={selectedNavItem === "home"}
+                />
               </Link>
               <Link href="/toaster">
-                <NavItem itemName="toaster" />
+                <NavItem
+                  itemName="toaster"
+                  isSelected={selectedNavItem === "toaster"}
+                />
               </Link>
               <Link href="/flyout">
-                <NavItem itemName="flyout" accent accentText="new" />
+                <NavItem
+                  itemName="flyout"
+                  isSelected={selectedNavItem === "flyout"}
+                />
+              </Link>
+              <Link href="/blog">
+                <NavItem
+                  itemName="blog"
+                  isSelected={selectedNavItem === "blog"}
+                  accent
+                  accentText="new"
+                />
               </Link>
             </motion.div>
           )}
         </AnimatePresence>
       </motion.div>
       {hasSubNav && subNavItems && (
-        <motion.div
-          className="flex flex-col gap-4 max-h-screen p-4 bg-default-base border-r-2 border-default-border"
-          initial={{ opacity: 0, width: "2rem" }}
-          animate={{ opacity: 1, width: "18rem" }}
-          transition={{
-            type: "spring",
-            stiffness: 700,
-            damping: 50,
-            delay: 0.03,
-          }}
-        >
+        <motion.div className="flex flex-col gap-4 max-h-screen p-4 bg-default-base border-r-2 border-default-border">
           <motion.div
             className="flex flex-col gap-1 pt-12"
             initial={{ opacity: 0, x: "-1rem" }}
@@ -84,13 +93,14 @@ export function Sidebar({ hasSubNav, subNavItems }: Props) {
               type: "spring",
               stiffness: 500,
               damping: 50,
-              delay: 0.03,
+              delay: 0.06,
             }}
           >
             {subNavItems.map((item, index) => (
               <Link key={index} href={item.href}>
                 <NavItem
                   itemName={item.name}
+                  isSelected={item.isSelected}
                   accent={item.accent}
                   accentText={item.accentText}
                 />

@@ -8,7 +8,7 @@ export default function Home() {
       <Sidebar
         hasSubNav
         subNavItems={[
-          { name: "bur", href: "/flyout/bur" },
+          { name: "bur", href: "/flyout/bur", isSelected: true },
           { name: "jfk", href: "/flyout/jfk" },
           { name: "sjc", href: "/flyout/sjc" },
         ]}
