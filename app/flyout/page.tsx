@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { Sidebar } from "../components/Sidebar";
 
 export default function Home() {
   return (
     <div className="bg-default-base text-fg-default min-h-screen flex flex-row gap-8">
       <Sidebar
+        selectedNavItem="flyout"
         hasSubNav
         subNavItems={[
           { name: "bur", href: "/flyout/bur" },

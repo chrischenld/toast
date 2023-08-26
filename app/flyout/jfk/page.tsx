@@ -9,7 +9,7 @@ export default function Home() {
         hasSubNav
         subNavItems={[
           { name: "bur", href: "/flyout/bur" },
-          { name: "jfk", href: "/flyout/jfk" },
+          { name: "jfk", href: "/flyout/jfk", isSelected: true },
           { name: "sjc", href: "/flyout/sjc" },
         ]}
       />

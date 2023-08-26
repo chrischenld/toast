@@ -74,7 +74,7 @@ export default function Home() {
 
   return (
     <div className="bg-default-base text-fg-default min-h-screen flex flex-row gap-8">
-      <Sidebar />
+      <Sidebar selectedNavItem="toaster" />
       <div className="p-8 flex flex-col gap-32">
         <Button text="pop toast" onClick={popToast} />
       </div>
