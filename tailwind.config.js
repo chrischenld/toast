@@ -27,6 +27,10 @@ module.exports = {
           muted: "#A1A1A1",
           accent: "#8E60BB",
         },
+        bg: {
+          base: "#1A1A1E",
+          inset: "#232329",
+        },
       },
       // backgroundImage: {
       //   "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

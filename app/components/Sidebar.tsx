@@ -5,11 +5,15 @@ import { NavItem } from "./NavItem";
 import { Button } from "./Button";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { DateFormatter } from "./DateFormatter"
+import { NavBlogItem } from "./NavBlogItem";
 
 interface Props {
   selectedNavItem?: string;
   hasSubNav?: boolean;
   subNavItems?: SubNavItems[];
+  hasBlogPosts?: boolean;
+  blogPosts?: BlogPost[];
 }
 
 interface SubNavItems {
@@ -20,7 +24,15 @@ interface SubNavItems {
   isSelected?: boolean;
 }
 
-export function Sidebar({ selectedNavItem, hasSubNav, subNavItems }: Props) {
+interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  content: string;
+  excerpt: string;
+}
+
+export function Sidebar({ selectedNavItem, hasSubNav, subNavItems, hasBlogPosts, blogPosts }: Props) {
   const [sidebarCollapse, setSidebarCollapse] = useState("18rem");
   const [hideCollapsed, setHideCollapsed] = useState(true);
 
@@ -32,6 +44,9 @@ export function Sidebar({ selectedNavItem, hasSubNav, subNavItems }: Props) {
 
   return (
     <div className="flex flex-row">
+
+      {/* Section for Main Nav */}
+
       <motion.div
         className={`flex flex-col gap-4 max-h-screen p-4 bg-default-base border-r-2 border-default-border`}
         initial={{ width: sidebarCollapse }} // Animate the width change
@@ -78,10 +93,21 @@ export function Sidebar({ selectedNavItem, hasSubNav, subNavItems }: Props) {
                   accentText="new"
                 />
               </Link>
+              <Link href="/blog3col">
+                <NavItem
+                  itemName="blog3col"
+                  isSelected={selectedNavItem === "blog3col"}
+                  accent
+                  accentText="new"
+                />
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>
       </motion.div>
+
+      {/* Section for Sub Nav */}
+
       {hasSubNav && subNavItems && (
         <motion.div className="flex flex-col gap-4 max-h-screen p-4 bg-default-base border-r-2 border-default-border">
           <motion.div
@@ -109,6 +135,35 @@ export function Sidebar({ selectedNavItem, hasSubNav, subNavItems }: Props) {
           </motion.div>
         </motion.div>
       )}
+
+      {/* Section for Blog Post Nav */}
+      
+      {hasBlogPosts && blogPosts && (
+        <motion.div className="flex flex-col gap-4 max-h-screen p-4 bg-default-base border-r-2 border-default-border">
+          <motion.div
+            className="flex flex-col gap-1"
+            initial={{ opacity: 0, x: "-1rem" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0.5, x: "-1rem" }}
+            transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 50,
+              delay: 0.06,
+            }}
+          >
+            {blogPosts && blogPosts.map((post) => (
+              <a key={post.slug}>
+                <div className="flex flex-col p-4 hover:bg-bg-inset rounded-sm w-64">
+                  <DateFormatter dateString={post.date} />
+                  {post.title}
+                </div>
+              </a>
+            ))}
+          </motion.div>
+        </motion.div>
+      )}
+
     </div>
   );
 }
